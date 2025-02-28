@@ -14,13 +14,7 @@ interface MainListProps<T extends ListItem> {
   onEdit: (item: T) => void
 }
 
-export default function MainList<T extends ListItem>({
-  data,
-  columns,
-  selectedItems,
-  onSelectItem,
-  onEdit,
-}: MainListProps<T>) {
+export default function MainList<T extends ListItem>({ data, columns, selectedItems, onSelectItem, onEdit }: MainListProps<T>) {
   const selectionColumn: ColumnsType<T> = [
     {
       title: '',
@@ -31,8 +25,8 @@ export default function MainList<T extends ListItem>({
           checked={selectedItems.some((item) => item.id === record.id)}
           onChange={(e) => onSelectItem(record, e.target.checked)}
         />
-      ),
-    },
+      )
+    }
   ]
 
   const editColumn: ColumnsType<T> = [
@@ -47,8 +41,8 @@ export default function MainList<T extends ListItem>({
         >
           Editar
         </Button>
-      ),
-    },
+      )
+    }
   ]
 
   return (

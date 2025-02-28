@@ -10,9 +10,7 @@ interface AppProps {
 export default function App({ children }: AppProps) {
   return (
     <Layout>
-      <DashboardLayout>
-        <Content>{children}</Content>
-      </DashboardLayout>
+      <DashboardLayout>{children}</DashboardLayout>
     </Layout>
   )
 }
