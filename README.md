@@ -1,2 +1,11 @@
-# Admin-Dashoboard
-Simple Admin Dashboard Using Node + TypeScript, Next.js and Ant Design 5
+# Admin-Dashoboard Stack 
+
+###  Backend: 
+  Node <br>
+  TypeScript <br>
+  Prisma<br>
+  Express
+  
+###  Frontend: 
+  React<br>
+  Ant Design 5
