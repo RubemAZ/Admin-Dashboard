@@ -1,12 +1,12 @@
-import { Layout, Menu, Button } from 'antd';
-import { UserOutlined, ShopOutlined, ProductOutlined, BulbOutlined, BulbFilled } from '@ant-design/icons';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import type { MenuProps } from 'antd';
+import { Layout, Menu, Button } from 'antd'
+import { UserOutlined, ShopOutlined, ProductOutlined, BulbOutlined, BulbFilled } from '@ant-design/icons'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import type { MenuProps } from 'antd'
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>['items'][number]
 
 const createMenuItem = (
     label: React.ReactNode,
@@ -18,25 +18,25 @@ const createMenuItem = (
     icon,
     children,
     label,
-} as MenuItem);
+} as MenuItem)
 
-const SPACING = 16;
-const LOGO_HEIGHT = 32;
-const LOGO_BACKGROUND = 'rgba(255, 255, 255, 0.2)';
+const SPACING = 16
+const LOGO_HEIGHT = 32
+const LOGO_BACKGROUND = 'rgba(255, 255, 255, 0.2)'
 
-type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark'
 
 interface DashboardLayoutProps {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-    const [collapsed, setCollapsed] = useState(false);
-    const [theme, setTheme] = useState<Theme>('light');
+    const [collapsed, setCollapsed] = useState(false)
+    const [theme, setTheme] = useState<Theme>('light')
 
     const toggleTheme = (): void => {
-        setTheme(theme === 'light' ? 'dark' : 'light');
-    };
+        setTheme(theme === 'light' ? 'dark' : 'light')
+    }
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
@@ -93,5 +93,5 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 </Content>
             </Layout>
         </Layout>
-    );
+    )
 }

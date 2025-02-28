@@ -1,15 +1,15 @@
-import { Table, Button, Popconfirm } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
-import type { ColumnsType } from 'antd/es/table';
+import { Table, Button, Popconfirm } from 'antd'
+import { DeleteOutlined } from '@ant-design/icons'
+import type { ColumnsType } from 'antd/es/table'
 
 interface ListItem {
-  id: number;
+  id: number
 }
 
 interface MainListProps<T extends ListItem> {
-  data: T[];
-  columns: ColumnsType<T>;
-  onDelete: (id: number) => void;
+  data: T[]
+  columns: ColumnsType<T>
+  onDelete: (id: number) => void
 }
 
 export default function MainList<T extends ListItem>({ data, columns, onDelete }: MainListProps<T>) {
@@ -28,7 +28,7 @@ export default function MainList<T extends ListItem>({ data, columns, onDelete }
         </Popconfirm>
       ),
     },
-  ];
+  ]
 
   return (
     <Table
@@ -37,5 +37,5 @@ export default function MainList<T extends ListItem>({ data, columns, onDelete }
       rowKey="id"
       pagination={false}
     />
-  );
+  )
 }

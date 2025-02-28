@@ -1,10 +1,10 @@
-import { Layout } from 'antd';
-import DashboardLayout from './components/DashboardLayout';
+import { Layout } from 'antd'
+import DashboardLayout from './components/DashboardLayout'
 
-const { Content } = Layout;
+const { Content } = Layout
 
 interface AppProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default function App({ children }: AppProps) {
@@ -14,5 +14,5 @@ export default function App({ children }: AppProps) {
         <Content>{children}</Content>
       </DashboardLayout>
     </Layout>
-  );
+  )
 }
