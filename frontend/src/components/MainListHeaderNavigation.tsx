@@ -6,6 +6,7 @@ interface MainListHeaderNavigationProps<T> {
   onSelectAll: (selectAll: boolean) => void
   onDeleteSelected: () => void
   onSearch: (searchTerm: string) => void
+  onAdd: () => void
   totalItems: number
 }
 
@@ -14,6 +15,7 @@ export default function MainListHeaderNavigation<T>({
   onSelectAll,
   onDeleteSelected,
   onSearch,
+  onAdd,
   totalItems,
 }: MainListHeaderNavigationProps<T>) {
   const isAllSelected = selectedItems.length === totalItems && totalItems > 0
