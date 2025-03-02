@@ -1,18 +1,18 @@
-import { Modal, Form, Input } from 'antd';
-import type { FormInstance } from 'antd/es/form';
+import { Modal, Form, Input } from 'antd'
+import type { FormInstance } from 'antd/es/form'
 
 interface FormField {
-  name: string;
-  label: string;
-  type?: 'text' | 'number';
+  name: string
+  label: string
+  type?: 'text' | 'number'
 }
 
 interface MainListModalProps<T extends Record<string, string | number>> {
-  open: boolean;
-  onClose: () => void;
-  onSave: (values: T) => void;
-  fields: FormField[];
-  initialValues?: T;
+  open: boolean
+  onClose: () => void
+  onSave: (values: T) => void
+  fields: FormField[]
+  initialValues?: T
 }
 
 export default function MainListModal<T extends Record<string, string | number>>({
@@ -22,15 +22,15 @@ export default function MainListModal<T extends Record<string, string | number>>
   fields,
   initialValues,
 }: MainListModalProps<T>) {
-  const [form]: [FormInstance<T>] = Form.useForm();
+  const [form]: [FormInstance<T>] = Form.useForm()
 
   const handleOk = (): void => {
     form.validateFields().then((values: T) => {
-      onSave(values);
-      form.resetFields();
-      onClose();
-    });
-  };
+      onSave(values)
+      form.resetFields()
+      onClose()
+    })
+  }
 
   return (
     <Modal
@@ -54,5 +54,5 @@ export default function MainListModal<T extends Record<string, string | number>>
         ))}
       </Form>
     </Modal>
-  );
+  )
 }
