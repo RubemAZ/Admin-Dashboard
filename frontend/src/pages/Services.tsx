@@ -4,8 +4,6 @@ import MainList from '../components/MainList'
 import MainListModal from '../components/MainListModal'
 import MainListHeaderNavigation from '../components/MainListHeaderNavigation'
 
-const SPACING = 24
-
 interface Service {
   id: number
   name: string
@@ -15,7 +13,7 @@ interface Service {
 export default function Services() {
   const [services, setServices] = useState<Service[]>([
     { id: 1, name: 'Consultoria', description: 'Serviço de consultoria' },
-    { id: 2, name: 'Manutenção', description: 'Manutenção geral' }
+    { id: 2, name: 'Manutenção', description: 'Manutenção geral' },
   ])
   const [filteredServices, setFilteredServices] = useState<Service[]>(services)
   const [selectedItems, setSelectedItems] = useState<Service[]>([])
@@ -68,37 +66,37 @@ export default function Services() {
 
   const columns: ColumnType<Service>[] = [
     { title: 'Nome', dataIndex: 'name', key: 'name' },
-    { title: 'Descrição', dataIndex: 'description', key: 'description' }
+    { title: 'Descrição', dataIndex: 'description', key: 'description' },
   ]
 
   return (
-    <div style={{ padding: SPACING }}>
-      <MainListHeaderNavigation
-        selectedItems={selectedItems}
-        onSelectAll={handleSelectAll}
-        onDeleteSelected={handleDeleteSelected}
-        onSearch={handleSearch}
-        onAdd={handleAdd}
-        totalItems={filteredServices.length}
-        addButtonLabel="Adicionar Serviço"
-      />
-      <MainList
-        data={filteredServices}
-        columns={columns}
-        selectedItems={selectedItems}
-        onSelectItem={handleSelectItem}
-        onEdit={handleEdit}
-      />
-      <MainListModal
-        open={openModal}
-        onClose={() => {
-          setOpenModal(false)
-          setEditingService(null)
-        }}
-        onSave={handleCreate}
-        fields={[{ name: 'name', label: 'Nome' }, { name: 'description', label: 'Descrição' }]}
-        initialValues={editingService || undefined}
-      />
-    </div>
+      <div className="page-content">
+        <MainListHeaderNavigation
+            selectedItems={selectedItems}
+            onSelectAll={handleSelectAll}
+            onDeleteSelected={handleDeleteSelected}
+            onSearch={handleSearch}
+            onAdd={handleAdd}
+            totalItems={filteredServices.length}
+            addButtonLabel="Adicionar Serviço"
+        />
+        <MainList
+            data={filteredServices}
+            columns={columns}
+            selectedItems={selectedItems}
+            onSelectItem={handleSelectItem}
+            onEdit={handleEdit}
+        />
+        <MainListModal
+            open={openModal}
+            onClose={() => {
+              setOpenModal(false);
+              setEditingService(null);
+            }}
+            onSave={handleCreate}
+            fields={[{ name: 'name', label: 'Nome' }, { name: 'description', label: 'Descrição' }]}
+            initialValues={editingService || undefined}
+        />
+      </div>
   )
 }

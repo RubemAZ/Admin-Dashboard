@@ -4,8 +4,6 @@ import MainList from '../components/MainList'
 import MainListModal from '../components/MainListModal'
 import MainListHeaderNavigation from '../components/MainListHeaderNavigation'
 
-const SPACING = 24
-
 interface User {
   id: number
   name: string
@@ -15,7 +13,7 @@ interface User {
 export default function Users() {
   const [users, setUsers] = useState<User[]>([
     { id: 1, name: 'João Silva', email: 'joao@example.com' },
-    { id: 2, name: 'Maria Oliveira', email: 'maria@example.com' }
+    { id: 2, name: 'Maria Oliveira', email: 'maria@example.com' },
   ])
   const [filteredUsers, setFilteredUsers] = useState<User[]>(users)
   const [selectedItems, setSelectedItems] = useState<User[]>([])
@@ -24,11 +22,9 @@ export default function Users() {
 
   const handleCreate = (values: Omit<User, 'id'>): void => {
     if (editingUser) {
-      // Edição
       setUsers(users.map((user) => (user.id === editingUser.id ? { ...user, ...values } : user)))
       setEditingUser(null)
     } else {
-      // Criação
       setUsers([...users, { id: users.length + 1, ...values }])
     }
     setOpenModal(false)
@@ -70,37 +66,37 @@ export default function Users() {
 
   const columns: ColumnType<User>[] = [
     { title: 'Nome', dataIndex: 'name', key: 'name' },
-    { title: 'Email', dataIndex: 'email', key: 'email' }
+    { title: 'Email', dataIndex: 'email', key: 'email' },
   ]
 
   return (
-    <div style={{ padding: SPACING }}>
-      <MainListHeaderNavigation
-        selectedItems={selectedItems}
-        onSelectAll={handleSelectAll}
-        onDeleteSelected={handleDeleteSelected}
-        onSearch={handleSearch}
-        onAdd={handleAdd}
-        totalItems={filteredUsers.length}
-        addButtonLabel="Adicionar Usuário"
-      />
-      <MainList
-        data={filteredUsers}
-        columns={columns}
-        selectedItems={selectedItems}
-        onSelectItem={handleSelectItem}
-        onEdit={handleEdit}
-      />
-      <MainListModal
-        open={openModal}
-        onClose={() => {
-          setOpenModal(false)
-          setEditingUser(null)
-        }}
-        onSave={handleCreate}
-        fields={[{ name: 'name', label: 'Nome' }, { name: 'email', label: 'Email' }]}
-        initialValues={editingUser || undefined}
-      />
-    </div>
+      <div className="page-content">
+        <MainListHeaderNavigation
+            selectedItems={selectedItems}
+            onSelectAll={handleSelectAll}
+            onDeleteSelected={handleDeleteSelected}
+            onSearch={handleSearch}
+            onAdd={handleAdd}
+            totalItems={filteredUsers.length}
+            addButtonLabel="Adicionar Usuário"
+        />
+        <MainList
+            data={filteredUsers}
+            columns={columns}
+            selectedItems={selectedItems}
+            onSelectItem={handleSelectItem}
+            onEdit={handleEdit}
+        />
+        <MainListModal
+            open={openModal}
+            onClose={() => {
+              setOpenModal(false);
+              setEditingUser(null);
+            }}
+            onSave={handleCreate}
+            fields={[{ name: 'name', label: 'Nome' }, { name: 'email', label: 'Email' }]}
+            initialValues={editingUser || undefined}
+        />
+      </div>
   )
 }

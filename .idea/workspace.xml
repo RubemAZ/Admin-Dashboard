@@ -5,15 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17221544-cb7d-4d96-946d-f031f2d60fdd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Admin-Dashboard.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/eslint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/eslint.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/DashboardLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DashboardLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MainList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MainList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MainListHeaderNavigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MainListHeaderNavigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Products.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Users.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +96,8 @@
       <option name="presentableId" value="Default" />
       <updated>1741718176795</updated>
       <workItem from="1741718180891" duration="1933000" />
-      <workItem from="1741720195100" duration="6644000" />
+      <workItem from="1741720195100" duration="10668000" />
+      <workItem from="1741781221356" duration="1548000" />
     </task>
     <servers />
   </component>

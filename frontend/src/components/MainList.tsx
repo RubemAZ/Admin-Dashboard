@@ -21,12 +21,12 @@ export default function MainList<T extends ListItem>({ data, columns, selectedIt
       key: 'selection',
       width: 50,
       render: (_, record) => (
-        <Checkbox
-          checked={selectedItems.some((item) => item.id === record.id)}
-          onChange={(e) => onSelectItem(record, e.target.checked)}
-        />
-      )
-    }
+          <Checkbox
+              checked={selectedItems.some((item) => item.id === record.id)}
+              onChange={(e) => onSelectItem(record, e.target.checked)}
+          />
+      ),
+    },
   ]
 
   const editColumn: ColumnsType<T> = [
@@ -34,23 +34,23 @@ export default function MainList<T extends ListItem>({ data, columns, selectedIt
       title: 'Ações',
       key: 'actions',
       render: (_, record) => (
-        <Button
-          type="link"
-          icon={<EditOutlined />}
-          onClick={() => onEdit(record)}
-        >
-          Editar
-        </Button>
-      )
-    }
+          <Button
+              type="link"
+              icon={<EditOutlined />}
+              onClick={() => onEdit(record)}
+          >
+            Editar
+          </Button>
+      ),
+    },
   ]
 
   return (
-    <Table
-      dataSource={data}
-      columns={[...selectionColumn, ...columns, ...editColumn]}
-      rowKey="id"
-      pagination={false}
-    />
+      <Table
+          dataSource={data}
+          columns={[...selectionColumn, ...columns, ...editColumn]}
+          rowKey="id"
+          pagination={false}
+      />
   )
 }

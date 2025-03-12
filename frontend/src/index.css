@@ -1,4 +1,91 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+:root {
+  --spacing-small: 16px;
+  --spacing-standard: 24px;
+  --spacing-button: 8px;
+  --logo-height: 32px;
+  --logo-background: rgb(255,255,255,0.2);
+}
+
+.logo {
+  height: var(--logo-height);
+  margin: var(--spacing-small);
+  background: var(--logo-background);
+}
+
+.theme-button {
+  width: 100%;
+  margin-top: var(--spacing-small);
+  border: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.theme-light .theme-button {
+  background: #ffffff;
+  color: #000;
+}
+
+.theme-dark .theme-button {
+  background: #2f2f2f;
+  color: #fff;
+}
+
+.theme-light .ant-layout-header {
+  background: #fff;
+}
+
+.theme-dark .ant-layout-header {
+  background: #001529;
+}
+
+.header-title {
+  padding: 0 var(--spacing-small);
+  line-height: 64px;
+}
+
+.theme-light .header-title {
+  color: #000;
+}
+
+.theme-dark .header-title {
+  color: #fff;
+}
+
+.content {
+  margin: var(--spacing-small);
+  padding: var(--spacing-standard);
+}
+
+.theme-light .content {
+  background: #fff;
+}
+
+.theme-dark .content {
+  background: #1f1f1f;
+}
+
+.list-header {
+  margin-bottom: var(--spacing-small);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-input {
+  width: 200px;
+}
+
+.home-container {
+  padding: var(--spacing-standard);
+}
+
+.button-group {
+  margin-top: calc(var(--spacing-standard) / 2);
+}
+
+.button-group .ant-button:not(:first-child) {
+  margin-left: var(--spacing-button);
+}
+
+.page-content {
+  padding: var(--spacing-standard);
 }

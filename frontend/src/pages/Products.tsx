@@ -4,8 +4,6 @@ import MainList from '../components/MainList'
 import MainListModal from '../components/MainListModal'
 import MainListHeaderNavigation from '../components/MainListHeaderNavigation'
 
-const SPACING = 24
-
 interface Product {
   id: number
   name: string
@@ -18,7 +16,7 @@ type ProductCreate = Omit<Product, 'id'>
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([
     { id: 1, name: 'Notebook', price: 2999.99, stock: 10 },
-    { id: 2, name: 'Mouse', price: 49.90, stock: 50 }
+    { id: 2, name: 'Mouse', price: 49.90, stock: 50 },
   ])
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products)
   const [selectedItems, setSelectedItems] = useState<Product[]>([])
@@ -27,7 +25,7 @@ export default function Products() {
 
   const handleCreate = (values: ProductCreate): void => {
     if (editingProduct) {
-      setProducts(products.map((product) => (product.id === editingProduct.id ? { ...product, ...values } : product)))
+      setProducts(products.map((product) => (product.id === editingProduct.id ? { ...product, ...values } : product)));
       setEditingProduct(null)
     } else {
       setProducts([...products, { id: products.length + 1, ...values }])
@@ -72,37 +70,37 @@ export default function Products() {
   const columns: ColumnType<Product>[] = [
     { title: 'Nome', dataIndex: 'name', key: 'name' },
     { title: 'Preço', dataIndex: 'price', key: 'price', render: (value: number) => `R$ ${value.toFixed(2)}` },
-    { title: 'Estoque', dataIndex: 'stock', key: 'stock' }
+    { title: 'Estoque', dataIndex: 'stock', key: 'stock' },
   ]
 
   return (
-    <div style={{ padding: SPACING }}>
-      <MainListHeaderNavigation
-        selectedItems={selectedItems}
-        onSelectAll={handleSelectAll}
-        onDeleteSelected={handleDeleteSelected}
-        onSearch={handleSearch}
-        onAdd={handleAdd}
-        totalItems={filteredProducts.length}
-        addButtonLabel="Adicionar Produto"
-      />
-      <MainList
-        data={filteredProducts}
-        columns={columns}
-        selectedItems={selectedItems}
-        onSelectItem={handleSelectItem}
-        onEdit={handleEdit}
-      />
-      <MainListModal
-        open={openModal}
-        onClose={() => {
-          setOpenModal(false)
-          setEditingProduct(null)
-        }}
-        onSave={handleCreate}
-        fields={[{ name: 'name', label: 'Nome' }, { name: 'price', label: 'Preço', type: 'number' }, { name: 'stock', label: 'Estoque', type: 'number' }]}
-        initialValues={editingProduct || undefined}
-      />
-    </div>
+      <div className="page-content">
+        <MainListHeaderNavigation
+            selectedItems={selectedItems}
+            onSelectAll={handleSelectAll}
+            onDeleteSelected={handleDeleteSelected}
+            onSearch={handleSearch}
+            onAdd={handleAdd}
+            totalItems={filteredProducts.length}
+            addButtonLabel="Adicionar Produto"
+        />
+        <MainList
+            data={filteredProducts}
+            columns={columns}
+            selectedItems={selectedItems}
+            onSelectItem={handleSelectItem}
+            onEdit={handleEdit}
+        />
+        <MainListModal
+            open={openModal}
+            onClose={() => {
+              setOpenModal(false);
+              setEditingProduct(null);
+            }}
+            onSave={handleCreate}
+            fields={[{ name: 'name', label: 'Nome' }, { name: 'price', label: 'Preço', type: 'number' }, { name: 'stock', label: 'Estoque', type: 'number' }]}
+            initialValues={editingProduct || undefined}
+        />
+      </div>
   )
 }
