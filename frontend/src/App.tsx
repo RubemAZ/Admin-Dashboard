@@ -1,4 +1,5 @@
 import { Layout } from 'antd'
+import './App.css'
 import DashboardLayout from './components/DashboardLayout'
 
 interface AppProps {

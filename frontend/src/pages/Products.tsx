@@ -3,6 +3,7 @@ import type { ColumnType } from 'antd/es/table'
 import MainList from '../components/MainList'
 import MainListModal from '../components/MainListModal'
 import MainListHeaderNavigation from '../components/MainListHeaderNavigation'
+import '../App.css'
 
 interface Product {
   id: number

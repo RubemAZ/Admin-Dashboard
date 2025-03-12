@@ -1,5 +1,6 @@
 import { Button, Input, Space, Popconfirm } from 'antd'
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons'
+import '../App.css'
 
 interface MainListHeaderNavigationProps<T> {
   selectedItems: T[]

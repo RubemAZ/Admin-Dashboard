@@ -1,5 +1,6 @@
 import { Button } from 'antd'
 import { Link } from 'react-router-dom'
+import '../App.css'
 
 const links = [
     { to: '/users', label: 'Gerenciar Usuários' },

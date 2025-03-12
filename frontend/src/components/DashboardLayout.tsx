@@ -3,6 +3,7 @@ import { UserOutlined, ShopOutlined, ProductOutlined, BulbOutlined, BulbFilled }
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { MenuProps } from 'antd'
+import '../App.css'
 
 const { Header, Sider, Content } = Layout
 
@@ -35,8 +36,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     }
 
     return (
-        <Layout className={theme}>
-            <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed} className={theme}>
+        <Layout>
+            <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
                 <div className="logo" />
                 <Menu
                     theme={theme}

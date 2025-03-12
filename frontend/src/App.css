@@ -1,3 +1,6 @@
+body{
+  background-color: #000;
+}
 :root {
   --spacing-small: 16px;
   --spacing-standard: 24px;
@@ -13,7 +16,6 @@
 }
 
 .theme-button {
-  width: 100%;
   margin-top: var(--spacing-small);
   border: none;
   transition: background 0.3s ease, transform 0.2s ease;
