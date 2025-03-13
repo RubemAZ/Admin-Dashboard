@@ -5,37 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17221544-cb7d-4d96-946d-f031f2d60fdd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/backend/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/Product/createProduct.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/Product/deleteProduct.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/Product/getAllProducts.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/Product/updateProduct.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/Service/createService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/Service/deleteService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/Service/getAllServices.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/Service/updateService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/User/createUser.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/User/deleteUser.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/User/getAllUsers.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/application/use-cases/User/updateUser.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/interfaces/controllers/userController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/interfaces/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/interfaces/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/product/createProduct.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/product/deleteProduct.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/product/getAllProducts.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/product/updateProduct.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/service/createService.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/service/deleteService.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/service/getAllServices.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/service/updateService.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/user/createUser.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/user/deleteUser.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/user/getAllUsers.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tests/unit/user/updateUser.test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/qodana_code_quality.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Admin-Dashboard.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +102,7 @@
       <workItem from="1741781221356" duration="1876000" />
       <workItem from="1741784039889" duration="5139000" />
       <workItem from="1741790677502" duration="1913000" />
-      <workItem from="1741796412586" duration="12104000" />
+      <workItem from="1741796412586" duration="13929000" />
     </task>
     <servers />
   </component>
