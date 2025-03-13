@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 
-export interface EntityInput {
+export type EntityInput = {
     id?: number
     [key: string]: any
 }
