@@ -18,6 +18,8 @@ model User {
   name      String
   email     String   @unique
   createdAt DateTime @default(now())
+
+  @@map("users")
 }
 
 model Product {
@@ -26,6 +28,8 @@ model Product {
   price     Float
   stock     Int
   createdAt DateTime @default(now())
+
+  @@map("products")
 }
 
 model Service {
@@ -33,4 +37,6 @@ model Service {
   name        String
   description String?
   createdAt   DateTime @default(now())
+
+  @@map("services")
 }
