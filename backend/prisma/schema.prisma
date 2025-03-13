@@ -4,13 +4,13 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -18,6 +18,18 @@ model User {
   name      String
   email     String   @unique
   createdAt DateTime @default(now())
+
+  @@map("users")
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  name      String
+  price     Float
+  stock     Int
+  createdAt DateTime @default(now())
+
+  @@map("products")
 }
 
 model Service {
@@ -25,12 +37,6 @@ model Service {
   name        String
   description String?
   createdAt   DateTime @default(now())
-}
 
-model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  price       Float
-  stock       Int
-  createdAt   DateTime @default(now())
+  @@map("services")
 }
