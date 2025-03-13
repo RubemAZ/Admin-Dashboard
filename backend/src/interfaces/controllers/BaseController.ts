@@ -14,7 +14,7 @@ export class BaseController<T> {
             const items = await this.useCase.getAll()
             res.json(items)
         } catch (error) {
-            res.status(500).json({ message: `Erro ao buscar ${this.useCase.entity}s` })
+            res.status(400).json({ message: `Erro ao buscar ${this.useCase.entity}s` })
         }
     }
 
