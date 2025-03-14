@@ -1,8 +1,10 @@
-import { useState } from 'react'
+// src/pages/Products.tsx
+import { useState, useEffect } from 'react'
 import type { ColumnType } from 'antd/es/table'
 import MainList from '../components/MainList'
 import MainListModal from '../components/MainListModal'
 import MainListHeaderNavigation from '../components/MainListHeaderNavigation'
+import api from '../services/api'
 import '../App.css'
 
 interface Product {
@@ -10,37 +12,57 @@ interface Product {
   name: string
   price: number
   stock: number
+  createdAt: string
 }
 
-type ProductCreate = Omit<Product, 'id'>
+type ProductCreate = Omit<Product, 'id' | 'createdAt'>
 
 export default function Products() {
-  const [products, setProducts] = useState<Product[]>([
-    { id: 1, name: 'Notebook', price: 2999.99, stock: 10 },
-    { id: 2, name: 'Mouse', price: 49.90, stock: 50 },
-  ])
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products)
+  const [products, setProducts] = useState<Product[]>([])
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
   const [selectedItems, setSelectedItems] = useState<Product[]>([])
   const [openModal, setOpenModal] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(false)
 
-  const handleCreate = (values: ProductCreate): void => {
-    if (editingProduct) {
-      setProducts(products.map((product) => (product.id === editingProduct.id ? { ...product, ...values } : product)));
-      setEditingProduct(null)
-    } else {
-      setProducts([...products, { id: products.length + 1, ...values }])
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
+  const fetchProducts = async () => {
+    setLoading(true)
+    try {
+      const response = await api.get('/products')
+      setProducts(response.data)
+      setFilteredProducts(response.data)
+    } catch (error) {
+      console.error('Erro ao buscar produtos:', error)
+    } finally {
+      setLoading(false)
     }
-    setOpenModal(false)
-    setFilteredProducts(products)
   }
 
-  const handleEdit = (product: Product): void => {
+  const handleCreate = async (values: ProductCreate) => {
+    try {
+      if (editingProduct) {
+        await api.put(`/products/${editingProduct.id}`, values)
+      } else {
+        await api.post('/products', values)
+      }
+      await fetchProducts()
+      setOpenModal(false)
+      setEditingProduct(null)
+    } catch (error) {
+      console.error('Erro ao salvar produto:', error)
+    }
+  }
+
+  const handleEdit = (product: Product) => {
     setEditingProduct(product)
     setOpenModal(true)
   }
 
-  const handleSelectItem = (item: Product, selected: boolean): void => {
+  const handleSelectItem = (item: Product, selected: boolean) => {
     if (selected) {
       setSelectedItems([...selectedItems, item])
     } else {
@@ -48,22 +70,26 @@ export default function Products() {
     }
   }
 
-  const handleSelectAll = (selectAll: boolean): void => {
+  const handleSelectAll = (selectAll: boolean) => {
     setSelectedItems(selectAll ? [...filteredProducts] : [])
   }
 
-  const handleDeleteSelected = (): void => {
-    setProducts(products.filter((product) => !selectedItems.includes(product)))
-    setFilteredProducts(filteredProducts.filter((product) => !selectedItems.includes(product)))
-    setSelectedItems([])
+  const handleDeleteSelected = async () => {
+    try {
+      await Promise.all(selectedItems.map((item) => api.delete(`/products/${item.id}`)))
+      await fetchProducts()
+      setSelectedItems([])
+    } catch (error) {
+      console.error('Erro ao deletar produtos:', error)
+    }
   }
 
-  const handleSearch = (searchTerm: string): void => {
+  const handleSearch = (searchTerm: string) => {
     const term = searchTerm.toLowerCase()
     setFilteredProducts(products.filter((product) => product.name.toLowerCase().includes(term)))
   }
 
-  const handleAdd = (): void => {
+  const handleAdd = () => {
     setEditingProduct(null)
     setOpenModal(true)
   }
@@ -72,6 +98,7 @@ export default function Products() {
     { title: 'Nome', dataIndex: 'name', key: 'name' },
     { title: 'Preço', dataIndex: 'price', key: 'price', render: (value: number) => `R$ ${value.toFixed(2)}` },
     { title: 'Estoque', dataIndex: 'stock', key: 'stock' },
+    { title: 'Criado em', dataIndex: 'createdAt', key: 'createdAt', render: (value: string) => new Date(value).toLocaleString() },
   ]
 
   return (
@@ -91,6 +118,7 @@ export default function Products() {
             selectedItems={selectedItems}
             onSelectItem={handleSelectItem}
             onEdit={handleEdit}
+            loading={loading}
         />
         <MainListModal
             open={openModal}
@@ -99,7 +127,11 @@ export default function Products() {
               setEditingProduct(null);
             }}
             onSave={handleCreate}
-            fields={[{ name: 'name', label: 'Nome' }, { name: 'price', label: 'Preço', type: 'number' }, { name: 'stock', label: 'Estoque', type: 'number' }]}
+            fields={[
+              { name: 'name', label: 'Nome' },
+              { name: 'price', label: 'Preço', type: 'number' },
+              { name: 'stock', label: 'Estoque', type: 'number' },
+            ]}
             initialValues={editingProduct || undefined}
         />
       </div>

@@ -1,43 +1,66 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { ColumnType } from 'antd/es/table'
 import MainList from '../components/MainList'
 import MainListModal from '../components/MainListModal'
 import MainListHeaderNavigation from '../components/MainListHeaderNavigation'
+import api from '../services/api'
 import '../App.css'
 
 interface Service {
   id: number
   name: string
-  description: string
+  description?: string
+  createdAt: string
 }
 
+type ServiceCreate = Omit<Service, 'id' | 'createdAt'>
+
 export default function Services() {
-  const [services, setServices] = useState<Service[]>([
-    { id: 1, name: 'Consultoria', description: 'Serviço de consultoria' },
-    { id: 2, name: 'Manutenção', description: 'Manutenção geral' },
-  ])
-  const [filteredServices, setFilteredServices] = useState<Service[]>(services)
+  const [services, setServices] = useState<Service[]>([])
+  const [filteredServices, setFilteredServices] = useState<Service[]>([])
   const [selectedItems, setSelectedItems] = useState<Service[]>([])
   const [openModal, setOpenModal] = useState(false)
   const [editingService, setEditingService] = useState<Service | null>(null)
+  const [loading, setLoading] = useState(false)
 
-  const handleCreate = (values: Omit<Service, 'id'>): void => {
-    if (editingService) {
-      setServices(services.map((service) => (service.id === editingService.id ? { ...service, ...values } : service)))
-      setEditingService(null)
-    } else {
-      setServices([...services, { id: services.length + 1, ...values }])
+  useEffect(() => {
+    fetchServices()
+  }, [])
+
+  const fetchServices = async () => {
+    setLoading(true)
+    try {
+      const response = await api.get('/services')
+      setServices(response.data)
+      setFilteredServices(response.data)
+    } catch (error) {
+      console.error('Erro ao buscar serviços:', error)
+    } finally {
+      setLoading(false)
     }
-    setOpenModal(false)
-    setFilteredServices(services)
   }
 
-  const handleEdit = (service: Service): void => {
+  const handleCreate = async (values: ServiceCreate) => {
+    try {
+      if (editingService) {
+        await api.put(`/services/${editingService.id}`, values)
+      } else {
+        await api.post('/services', values)
+      }
+      await fetchServices()
+      setOpenModal(false)
+      setEditingService(null)
+    } catch (error) {
+      console.error('Erro ao salvar serviço:', error)
+    }
+  }
+
+  const handleEdit = (service: Service) => {
     setEditingService(service)
     setOpenModal(true)
   }
 
-  const handleSelectItem = (item: Service, selected: boolean): void => {
+  const handleSelectItem = (item: Service, selected: boolean) => {
     if (selected) {
       setSelectedItems([...selectedItems, item])
     } else {
@@ -45,22 +68,26 @@ export default function Services() {
     }
   }
 
-  const handleSelectAll = (selectAll: boolean): void => {
+  const handleSelectAll = (selectAll: boolean) => {
     setSelectedItems(selectAll ? [...filteredServices] : [])
   }
 
-  const handleDeleteSelected = (): void => {
-    setServices(services.filter((service) => !selectedItems.includes(service)))
-    setFilteredServices(filteredServices.filter((service) => !selectedItems.includes(service)))
-    setSelectedItems([])
+  const handleDeleteSelected = async () => {
+    try {
+      await Promise.all(selectedItems.map((item) => api.delete(`/services/${item.id}`)))
+      await fetchServices()
+      setSelectedItems([])
+    } catch (error) {
+      console.error('Erro ao deletar serviços:', error)
+    }
   }
 
-  const handleSearch = (searchTerm: string): void => {
+  const handleSearch = (searchTerm: string) => {
     const term = searchTerm.toLowerCase()
     setFilteredServices(services.filter((service) => service.name.toLowerCase().includes(term)))
   }
 
-  const handleAdd = (): void => {
+  const handleAdd = () => {
     setEditingService(null)
     setOpenModal(true)
   }
@@ -68,6 +95,7 @@ export default function Services() {
   const columns: ColumnType<Service>[] = [
     { title: 'Nome', dataIndex: 'name', key: 'name' },
     { title: 'Descrição', dataIndex: 'description', key: 'description' },
+    { title: 'Criado em', dataIndex: 'createdAt', key: 'createdAt', render: (value: string) => new Date(value).toLocaleString() },
   ]
 
   return (
@@ -87,6 +115,7 @@ export default function Services() {
             selectedItems={selectedItems}
             onSelectItem={handleSelectItem}
             onEdit={handleEdit}
+            loading={loading}
         />
         <MainListModal
             open={openModal}
