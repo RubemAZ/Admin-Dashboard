@@ -6,7 +6,7 @@ export const validate =
         (req: Request, res: Response, next: NextFunction) => {
             try {
                 const data = req.params.id ? { id: Number(req.params.id), ...req.body } : req.body
-                schema.parse(data)// Valida os dados combinados
+                schema.parse(data)
                 if (req.params.id) req.body = data
                 next()
             } catch (error) {

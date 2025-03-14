@@ -3,6 +3,7 @@
     "@prisma/client": "^6.4.1",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.5",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mysql2": "^3.12.0",
@@ -14,6 +15,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/jest": "^29.5.14",
     "@types/mysql2": "github:types/mysql2",
     "@types/supertest": "^6.0.2",

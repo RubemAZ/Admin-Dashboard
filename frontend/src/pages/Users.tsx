@@ -1,43 +1,68 @@
-import { useState } from 'react'
+// src/pages/Users.tsx
+import { useState, useEffect } from 'react'
 import type { ColumnType } from 'antd/es/table'
 import MainList from '../components/MainList'
 import MainListModal from '../components/MainListModal'
 import MainListHeaderNavigation from '../components/MainListHeaderNavigation'
+import api from '../services/api'
 import '../App.css'
 
 interface User {
   id: number
   name: string
   email: string
+  createdAt: string
 }
 
+type UserCreate = Omit<User, 'id' | 'createdAt'>
+
 export default function Users() {
-  const [users, setUsers] = useState<User[]>([
-    { id: 1, name: 'João Silva', email: 'joao@example.com' },
-    { id: 2, name: 'Maria Oliveira', email: 'maria@example.com' },
-  ])
-  const [filteredUsers, setFilteredUsers] = useState<User[]>(users)
+  const [users, setUsers] = useState<User[]>([])
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([])
   const [selectedItems, setSelectedItems] = useState<User[]>([])
   const [openModal, setOpenModal] = useState(false)
   const [editingUser, setEditingUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(false)
 
-  const handleCreate = (values: Omit<User, 'id'>): void => {
-    if (editingUser) {
-      setUsers(users.map((user) => (user.id === editingUser.id ? { ...user, ...values } : user)))
-      setEditingUser(null)
-    } else {
-      setUsers([...users, { id: users.length + 1, ...values }])
+  // Carregar usuários ao montar o componente
+  useEffect(() => {
+    fetchUsers()
+  }, [])
+
+  const fetchUsers = async () => {
+    setLoading(true)
+    try {
+      const response = await api.get('/users')
+      setUsers(response.data)
+      setFilteredUsers(response.data)
+    } catch (error) {
+      console.error('Erro ao buscar usuários:', error)
+    } finally {
+      setLoading(false)
     }
-    setOpenModal(false)
-    setFilteredUsers(users)
+  };
+
+  const handleCreate = async (values: UserCreate) => {
+    try {
+      if (editingUser) {
+        await api.put(`/users/${editingUser.id}`, values)
+      } else {
+        await api.post('/users', values)
+      }
+      await fetchUsers()
+      setOpenModal(false)
+      setEditingUser(null)
+    } catch (error) {
+      console.error('Erro ao salvar usuário:', error)
+    }
   }
 
-  const handleEdit = (user: User): void => {
+  const handleEdit = (user: User) => {
     setEditingUser(user)
     setOpenModal(true)
   }
 
-  const handleSelectItem = (item: User, selected: boolean): void => {
+  const handleSelectItem = (item: User, selected: boolean) => {
     if (selected) {
       setSelectedItems([...selectedItems, item])
     } else {
@@ -45,22 +70,26 @@ export default function Users() {
     }
   }
 
-  const handleSelectAll = (selectAll: boolean): void => {
+  const handleSelectAll = (selectAll: boolean) => {
     setSelectedItems(selectAll ? [...filteredUsers] : [])
   }
 
-  const handleDeleteSelected = (): void => {
-    setUsers(users.filter((user) => !selectedItems.includes(user)))
-    setFilteredUsers(filteredUsers.filter((user) => !selectedItems.includes(user)))
-    setSelectedItems([])
+  const handleDeleteSelected = async () => {
+    try {
+      await Promise.all(selectedItems.map((item) => api.delete(`/users/${item.id}`)))
+      await fetchUsers()
+      setSelectedItems([])
+    } catch (error) {
+      console.error('Erro ao deletar usuários:', error)
+    }
   }
 
-  const handleSearch = (searchTerm: string): void => {
+  const handleSearch = (searchTerm: string) => {
     const term = searchTerm.toLowerCase()
     setFilteredUsers(users.filter((user) => user.name.toLowerCase().includes(term)))
   }
 
-  const handleAdd = (): void => {
+  const handleAdd = () => {
     setEditingUser(null)
     setOpenModal(true)
   }
@@ -68,6 +97,7 @@ export default function Users() {
   const columns: ColumnType<User>[] = [
     { title: 'Nome', dataIndex: 'name', key: 'name' },
     { title: 'Email', dataIndex: 'email', key: 'email' },
+    { title: 'Criado em', dataIndex: 'createdAt', key: 'createdAt', render: (value: string) => new Date(value).toLocaleString() },
   ]
 
   return (
@@ -87,12 +117,13 @@ export default function Users() {
             selectedItems={selectedItems}
             onSelectItem={handleSelectItem}
             onEdit={handleEdit}
+            loading={loading}
         />
         <MainListModal
             open={openModal}
             onClose={() => {
-              setOpenModal(false);
-              setEditingUser(null);
+              setOpenModal(false)
+              setEditingUser(null)
             }}
             onSave={handleCreate}
             fields={[{ name: 'name', label: 'Nome' }, { name: 'email', label: 'Email' }]}
