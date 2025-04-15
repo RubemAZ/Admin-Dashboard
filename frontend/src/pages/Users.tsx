@@ -1,4 +1,3 @@
-// src/pages/Users.tsx
 import { useState, useEffect } from 'react'
 import type { ColumnType } from 'antd/es/table'
 import MainList from '../components/MainList'
@@ -24,7 +23,6 @@ export default function Users() {
   const [editingUser, setEditingUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(false)
 
-  // Carregar usuários ao montar o componente
   useEffect(() => {
     fetchUsers()
   }, [])

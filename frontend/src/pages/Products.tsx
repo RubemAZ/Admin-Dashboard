@@ -1,4 +1,3 @@
-// src/pages/Products.tsx
 import { useState, useEffect } from 'react'
 import type { ColumnType } from 'antd/es/table'
 import MainList from '../components/MainList'
